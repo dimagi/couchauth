@@ -25,6 +25,8 @@ class User(Document):
     
     password = StringProperty() # Use '[algo]$[salt]$[hexdigest]'
 
+    full_name = StringProperty()
+
     is_active = BooleanProperty(default=True)
     is_superuser = BooleanProperty(default=True)
     last_login = DateTimeProperty(required=False)
@@ -37,6 +39,20 @@ class User(Document):
     @property
     def username(self):
         return self.email
+
+    @property
+    def first_name(self):
+        try:
+            return self.full_name.split(' ')[0]
+        except Exception:
+            return ''
+
+    @property
+    def last_name(self):
+        return self.full_name[self.full_name.index(' ')+1:]
+    
+    def get_full_name(self):
+        return self.full_name
 
     @classmethod
     def get_one(cls, key):

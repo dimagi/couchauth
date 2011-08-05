@@ -1,0 +1,2 @@
+There's very little "original" code in here; most of it is copied directly from django.contrib.auth
+and modified only slightly to use a CouchDB backend with couchdbkit.
